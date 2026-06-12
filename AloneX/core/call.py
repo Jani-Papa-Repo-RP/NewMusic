@@ -105,11 +105,11 @@ class Call(PyTgCalls):
 
     async def pause_stream(self, chat_id: int):
         assistant = await group_assistant(self, chat_id)
-        await assistant.pause_stream(chat_id)
+        await assistant.pause(chat_id)
 
     async def resume_stream(self, chat_id: int):
         assistant = await group_assistant(self, chat_id)
-        await assistant.resume_stream(chat_id)
+        await assistant.resume(chat_id)
 
     async def stop_stream(self, chat_id: int):
         assistant = await group_assistant(self, chat_id)
@@ -331,7 +331,7 @@ class Call(PyTgCalls):
             if users == 1:
                 autoend[chat_id] = datetime.now() + timedelta(minutes=1)
 
-    async def play(self, client, chat_id):
+    async def change_stream(self, client, chat_id):
         check = db.get(chat_id)
         popped = None
         loop = await get_loop(chat_id)
@@ -587,7 +587,7 @@ class Call(PyTgCalls):
         async def stream_end_handler1(client, update: Update):
             if not isinstance(update, StreamEnded):
                 return
-            await self.play(client, update.chat_id)
+            await self.change_stream(client, update.chat_id)
 
 
 Alone = Call()
