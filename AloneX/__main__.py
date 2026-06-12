@@ -2,7 +2,7 @@ import asyncio
 import importlib
 
 from pyrogram import idle
-from pytgcalls.exceptions import NoActiveGroupCall
+from pytgcalls.exceptions import NotInCallError
 
 import config
 from AloneX import LOGGER, app, userbot
@@ -41,7 +41,7 @@ async def init():
     await Alone.start()
     try:
         await Alone.stream_call("https://te.legra.ph/file/39b302c93da5c457a87e3.mp4")
-    except NoActiveGroupCall:
+    except NotInCallError:
         LOGGER("AloneX").error(
             "ʙsᴅᴋ ᴠᴄ ᴛᴏ ᴏɴ ᴋᴀʀʟᴇ  ʟᴏɢ ɢʀᴏᴜᴘ\ᴄʜᴀɴɴᴇʟ ᴋɪ.\n\n ᴏɴ ᴋᴀʀᴋᴇ ᴀᴀ ᴛᴀʙ ᴛᴀᴋ ʙᴏᴛ ʙᴀɴᴅ ᴋᴀʀ ʀʜᴀ ʜᴏᴏɴ..."
         )

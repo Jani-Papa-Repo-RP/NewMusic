@@ -2,7 +2,7 @@ import random
 import string
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message
-from pytgcalls.exceptions import NoActiveGroupCall
+from pytgcalls.exceptions import NotInCallError
 
 import config
 from AloneX import Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app
@@ -293,7 +293,7 @@ async def play_commnd(
         else:
             try:
                 await Alone.stream_call(url)
-            except NoActiveGroupCall:
+            except NotInCallError:
                 await mystic.edit_text(_["black_9"])
                 return await app.send_message(
                     chat_id=config.LOGGER_ID,
